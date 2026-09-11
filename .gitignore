@@ -1,3 +1,4 @@
+.DS_Store
 objs/
 dist/README-SDL.txt
 dist/README-glm.txt
