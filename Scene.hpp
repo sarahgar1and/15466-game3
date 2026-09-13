@@ -54,6 +54,9 @@ struct Scene {
 		Drawable(Transform *transform_) : transform(transform_) { assert(transform); }
 		Transform * transform;
 
+		glm::vec3 min; // Mesh bbox min
+		glm::vec3 max; // Mesh bbox max
+
 		//Contains all the data needed to run the OpenGL pipeline:
 		struct Pipeline {
 			GLuint program = 0; //shader program; passed to glUseProgram

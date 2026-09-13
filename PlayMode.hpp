@@ -28,18 +28,27 @@ struct PlayMode : Mode {
 	//local copy of the game scene (so code can change it during gameplay):
 	Scene scene;
 
-	//hexapod leg to wobble:
+	int locks_left = 1;
+ 
 	Scene::Transform *ghost = nullptr;
-	glm::quat hip_base_rotation;
-	glm::quat upper_leg_base_rotation;
-	glm::quat lower_leg_base_rotation;
+	Scene::Transform *key1 = nullptr;
+	Scene::Transform *lock1 = nullptr;
+	Scene::Transform *grabbed_key = nullptr;
+	// Player bbox
+	glm::vec3 ghost_min;
+	glm::vec3 ghost_max;
+	// Key bbox
+	glm::vec3 key1_min;
+	glm::vec3 key1_max;
+	// Lock bbox
+	glm::vec3 lock1_min;
+	glm::vec3 lock1_max;
+
 	float wobble = 0.0f;
-
-	//music coming from the tip of the leg (as a demonstration):
+	
 	std::shared_ptr< Sound::PlayingSample > background_loop;
-
-	//car honk sound:
-	std::shared_ptr< Sound::PlayingSample > honk_oneshot;
+	bool background_muted = false;
+	std::shared_ptr< Sound::PlayingSample > key1_oneshot;
 	
 	//camera:
 	Scene::Camera *camera = nullptr;

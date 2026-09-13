@@ -12,6 +12,10 @@ Background music [BeepBox Link](https://www.beepbox.co/#9n31s7k2l07e09t22a7g0ij0
 
 How To Play:
 
-(TODO: describe the controls and (if needed) goals/strategy.)
+- `WASD` - move 
+- `Space` - listen to key/lock
+- `M` - mute/unmute background music
+- `Q` - pickup/drop a key
+- `E` - use key on lock
 
 This game was built with [NEST](NEST.md).
