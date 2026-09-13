@@ -63,8 +63,10 @@ PlayMode::PlayMode() : scene(*room_scene) {
 		if (transform.name == "Ghost") ghost = &transform;
 		if (transform.name == "Key1") key1 = &transform;
 		if (transform.name == "Lock1") lock1 = &transform;
+		if (transform.name == "Shadow") shadow = &transform;
 	}
 	if (ghost == nullptr) throw std::runtime_error("Ghost not found.");
+	if (shadow == nullptr) throw std::runtime_error("Shadow not found.");
 	if (key1 == nullptr) throw std::runtime_error("Key1 not found.");
 	if (lock1 == nullptr) throw std::runtime_error("Lock1 not found.");
 	for (auto & drawable : scene.drawables){
@@ -83,6 +85,9 @@ PlayMode::PlayMode() : scene(*room_scene) {
 	//get pointer to camera for convenience:
 	if (scene.cameras.size() != 1) throw std::runtime_error("Expecting scene to have exactly one camera, but it has " + std::to_string(scene.cameras.size()));
 	camera = &scene.cameras.front();
+
+	ghost_pos = ghost->position;
+	shadow_scale = shadow->scale;
 
 	//start music loop playing:
 	background_loop = Sound::loop(*background_sample, 1.0f);
@@ -179,7 +184,10 @@ void PlayMode::update(float elapsed) {
 	wobble += elapsed / 10.0f;
 	wobble -= std::floor(wobble);
 
-	// ghost->position = ghost->position + glm::vec3(0.0f, 0.9f, dist);
+	float d = (std::sin(wobble * 2.0f * 2.0f * float(M_PI)) - 0.5f) * 0.25f;
+	ghost->position = glm::vec3(ghost->position.x, ghost->position.y, ghost_pos.z + d);
+
+	shadow->scale = shadow_scale + glm::vec3(d, d, 0.0f);
 
 	//move camera:
 	{
@@ -209,6 +217,7 @@ void PlayMode::update(float elapsed) {
 		glm::vec3 player_right = player[0];
 		glm::vec3 player_forward = player[1];
 		ghost->position += move_player.x * player_right + move_player.y * player_forward;
+		shadow->position += move_player.x * player_right + move_player.y * player_forward;
 
 		if (grabbed_key){
 			grabbed_key->position = glm::vec3(ghost->position.x, ghost->position.y - 1.0f, grabbed_key->position.z);

@@ -31,9 +31,12 @@ struct PlayMode : Mode {
 	int locks_left = 1;
  
 	Scene::Transform *ghost = nullptr;
+	Scene::Transform *shadow = nullptr; // Ghost's shadow
 	Scene::Transform *key1 = nullptr;
 	Scene::Transform *lock1 = nullptr;
 	Scene::Transform *grabbed_key = nullptr;
+	glm::vec3 ghost_pos; // Original position
+	glm::vec3 shadow_scale;
 	// Player bbox
 	glm::vec3 ghost_min;
 	glm::vec3 ghost_max;
