@@ -2,7 +2,8 @@
 
 Author: Sarah Garland (sgarlan2)
 
-Design: Match keys to locks by matching pitch and escape the dungeon. 
+Design: Match keys to locks by matching pitch and escape the dungeon. (Note: I didn't completely
+finish since I've been sick the past few days)
 
 Screen Shot:
 
@@ -17,5 +18,7 @@ How To Play:
 - `M` - mute/unmute background music
 - `Q` - pickup/drop a key
 - `E` - use key on lock
+
+Lower left corner shows how many keys are left to unlock.
 
 This game was built with [NEST](NEST.md).
